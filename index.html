@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>画像アンケート</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; margin: 20px; background: #f0f0f0; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        img { max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 20px; }
+        iframe { width: 100%; height: 700px; border: none; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>アンケートにご協力ください</h2>
+    
+    <img id="survey-image" src="" alt="アンケート画像">
+
+    <iframe id="survey-form" src="">読み込み中...</iframe>
+</div>
+
+<script>
+    // ========================================================
+    // 【設定項目】ここをあなたの情報に書き換えてください
+    // ========================================================
+    const FOLDER_ID = "1duwe4QiB8XxwxtFUwu6CScGfhLsBgNOM";
+    const FORM_URL_BASE = "https://docs.google.com/forms/d/e/1FAIpQLSeF-18f_-_v4VBSLJOyV0RAILioz9IKt1rQCj7dQdObpkNXqQ/viewform";
+    const ENTRY_ID = "entry.66031916=9999"; // 9999の前にあったentry.数字
+    const MAX_IMAGES = 5; // 画像の総数（テストは5、本番は1000）
+    // ========================================================
+
+    // 1からMAX_IMAGESまでの数字をランダムに1つ選ぶ
+    const randomNum = Math.floor(Math.random() * MAX_IMAGES) + 1;
+
+    // Googleドライブの直リンクURLを生成（拡張子は適宜 .jpg や .png に変更してください）
+    const imageUrl = "https://thumbnailproduct.is.autodyn.prod.google.com/thumbnail/xyz?id=" + FOLDER_ID + "&w=800&h=800&file=" + randomNum + ".jpg";
+    
+    // 画像を画面にセット
+    document.getElementById("survey-image").src = imageUrl;
+
+    // GoogleフォームのURLを生成（画像番号を自動入力するリンクにする）
+    const finalFormUrl = FORM_URL_BASE + "?" + ENTRY_ID + "=" + randomNum;
+    
+    // フォームを画面にセット
+    document.getElementById("survey-form").src = finalFormUrl;
+</script>
+
+</body>
+</html>
